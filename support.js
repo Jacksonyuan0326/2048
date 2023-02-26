@@ -34,8 +34,17 @@ function getNumberColor(num){
 function nospace(board){
     for(var i = 0; i < 4; i++)
         for(var j = 0; j < 4; j++){
-            if(board[i][j] == 0)
+            if(board[i][j] == 0)//The position is empty
                 return true;
         }
+    return false;
+}
+
+function canMoveLeft(board){
+    for(var i = 0; i < 4; i++)
+        for(var j = 0; j < 4; j++)
+            if(board[i][j] != 0)/**the position has a number */
+                if(board[i][j-1] == 0/*the left of position is empty*/||board[i][j-1] == board[i][j]/*same value*/)//then it can go left
+                    return true;
     return false;
 }
