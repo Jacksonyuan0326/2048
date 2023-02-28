@@ -12,3 +12,15 @@ function showNumberAnimation(randx,randy,randNum){
         left:getPosLeft(i,j)
     },50);
 }
+
+function showMoveAnimation(fromx,fromy,tox,toy){
+    var numCell = $('#number-cell-'+fromx+'-'+fromy);
+    numCell.animate({
+        top:getPosTop(tox,toy),
+        left:getPosLeft(tox,toy)
+    },200)
+}
+
+function updateScore(score){
+    $('#score'.text(score));//可以增加像老虎机一样的分数增长动画
+}

@@ -48,3 +48,37 @@ function canMoveLeft(board){
                     return true;
     return false;
 }
+
+function canMoveRight(board){
+
+}
+
+function canMoveUp(board){
+
+}
+
+function canMoveDown(board){
+
+}
+
+function noBlockHorizontal(row,col1,col2,board){//check there is any block from col1 to col2
+    for(var i = col1+1 ; i < col2; i++){
+        if(board[row][i]!=0)//there is a block
+            return false;
+    }
+    return true;
+}
+
+function noBlockVertical(col,row1,row2,board){
+    for(var i = row1+1; i < row2; i++)
+        if(board[i][col]!=0)
+            return false;
+    return true;
+}
+
+function nomove(board){
+    if(canMoveDown(board)||canMoveLeft(board)||canMoveRight(board)||canMoveUp(board))
+        return false;
+
+    return true;
+}
