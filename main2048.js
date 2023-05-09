@@ -53,14 +53,12 @@ function init(){
         board[i] = new Array();
         hasConflicted[i] = new Array();
         for(var j = 0; i < 4; j++)
-        board[i][j] = 0;
+            board[i][j] = 0;
         hasConflicted[i][j] = false;//make the merge operation only happened once
     }
 
     updateBoard();
 
-    score = 0;
-    $('#score').text(score);
 }
 
 function updateBoard(){
