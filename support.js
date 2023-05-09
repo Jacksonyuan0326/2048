@@ -1,10 +1,16 @@
+/*The following variable is used for mobile game*/
+documentWidth = window.screen.availWidth;//width of screen
+gridContainerWidth = 0.92 * documentWidth;// the board of main game
+cellSideLength =0.18 * documentWidth;//each cell in the board
+cellSpace = 0.04*documentWidth;//the space bewtween of each cell
+
 /*This function is used to get the left position cell at index [i][j] */
 function getPosTop(i,j){
-    return 20+i*120;
+    return cellSpace+i*(cellSpace+cellSideLength);
 }
 /*This function is used to get the left position cell at index [i][j] */
 function getPosLeft(i,j){
-    return 20+j*120;
+    return cellSpace+j*(cellSpace+cellSideLength);
 }
 
 function getNumberBackgroundColor(number) {
