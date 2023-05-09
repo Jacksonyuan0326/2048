@@ -3,12 +3,18 @@ var score = 0;
 
 var hasConflicted = new Array();
 
+var startx = 0;
+var starty = 0;
+var endx = 0;
+var endy = 0;
+
 $(document).ready(function(){
     prepareMobile();
     newgame();
 })
 
 function prepareMobile(){
+    /* We justify about screen width and adjust it for website*/
     if (documentWidth > 500) {
         gridContainerWidth = 500;
         cellSpace = 20;
@@ -132,26 +138,31 @@ function generateOneNumber(){
 }
 
 $(document).keydown(function(event){
+    
     switch(event.keyCode){
         case 37: //left
+        event.preventDefault();
             if(moveLeft()){//if we can move left,then we generate one more number
                 setTimeout("generateOneNumber()",210);
                 setTimeout("isGameOver()",300);//check whether game is over?
             }
             break;
         case 38: //up
+        event.preventDefault();
         if(moveUp()){//if we can move up,then we generate one more number
             setTimeout("generateOneNumber()",210);
             setTimeout("isGameOver()",300);//check whether game is over?
         }
             break;
         case 39:  //right
+        event.preventDefault();
         if(moveRight()){//if we can move right,then we generate one more number
             setTimeout("generateOneNumber()",210);
             setTimeout("isGameOver()",300);//check whether game is over?
         }
             break;
         case 40:  //down
+        event.preventDefault();
         if(moveDown()){//if we can move down,then we generate one more number
             setTimeout("generateOneNumber()",210);
             setTimeout("isGameOver()",300);//check whether game is over?
@@ -161,6 +172,67 @@ $(document).keydown(function(event){
             break;
     }
 })
+
+document.addEventListener('touchstart', function(event){
+    startx = event.touches[0].pageX;
+    starty = event.touches[0].pageY;
+
+}); //add eventListner for mobile
+
+document.addEventListener('touchmove',function(event){event.preventDefault();});
+
+/*Because we only have four direction and only work for one finger, so we have a vector that (endx - startx, endy - starty)*/
+/*IF (endx - startx) > 0, we move at x-axis and left, 
+     (endx - startx) < 0, we move at x-axis and right,
+     (endy - starty) < 0, we move at y-axis and up,
+     (endy - starty) > 0, we move at y-axis and down,   */
+document.addEventListener('touchend', function(event){
+    endx = event.changedTouches[0].pageX;
+    endy = event.changedTouches[0].pageY;
+
+    var changex = endx - startx;
+    var changey = endy - starty;
+
+    /*Add condition to avoid the operation after one click with board or new game, in other words, prevent accidental touching*/
+    if(Math.abs(changex) < 0.3*documentWidth && Math.abs(changey) < 0.3*documentWidth)
+    {
+        return;
+    }
+
+    //move at x-axis
+    if(Math.abs(changex) >= Math.abs(changey)){
+        if(changex > 0){
+            //move right
+            if (moveRight()) {
+                setTimeout('generateOneNumber()', 210);
+                setTimeout('isgameover()', 300);
+            }
+        }
+        else{
+            //move left
+            if (moveLeft()) {
+                setTimeout('generateOneNumber()', 210);
+                setTimeout('isgameover()', 300);
+            }
+        }
+    }else{/*Move at y-axis */
+        if(changey > 0){
+            //move down
+            if (moveDown()) {
+                setTimeout('generateOneNumber()', 210);
+                setTimeout('isgameover()', 300);
+            }
+        }
+        else{
+            //move up
+            if (moveUp()) {
+                setTimeout('generateOneNumber()', 210);
+                setTimeout('isgameover()', 300);
+            }
+        }
+    }
+}); 
+
 
 function isGameOver() {
     if(nospace(board) && nomove(board)){
