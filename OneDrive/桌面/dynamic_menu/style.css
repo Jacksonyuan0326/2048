@@ -1,0 +1,22 @@
+body{
+    margin: 0;
+
+}
+.cirular-menu{
+    position: relative;
+    font-size: 18px;
+    border-radius: 50%;
+}
+.inner-circle{
+    content: "";
+    background: #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 0 1em rgba(0,0,0,0.8);
+}
