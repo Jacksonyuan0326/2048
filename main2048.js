@@ -60,34 +60,36 @@ function init(){
 
 }
 
-function updateBoard(){
-    $(".number-cell").remove();
+function updateBoard() {
 
-    for(var i = 0; i < 4; i++)
-        for(var j = 0; j < 4; j++){
+    $(".number-cell").remove();
+    for (var i = 0; i < 4; i++)
+        for (var j = 0; j < 4; j++) {
             $("#grid-container").append('<div class="number-cell" id="number-cell-' + i + '-' + j + '"></div>');
             var theNumberCell = $('#number-cell-' + i + '-' + j);
 
-            if(board[i][j] == 0){
-                theNumberCell.css('width','0px');
-                theNumberCell.css('height','0px');
-                theNumberCell.css('top',getPosTop(i,j)+cellSideLength/2);
-                theNumberCell.css('left',getPosLeft(i,j)+cellSideLength/2);
-            }else{
+            if (board[i][j] == 0) {
+                theNumberCell.css('width', '0px');
+                theNumberCell.css('height', '0px');
+                theNumberCell.css('top', getPosTop(i, j) + cellSideLength / 2);
+                theNumberCell.css('left', getPosLeft(i, j) + cellSideLength / 2);
+            }
+            else {
                 theNumberCell.css('width', cellSideLength);
-                theNumberCell.css('height',cellSideLength);
-                theNumberCell.css('top',getPosTop(i,j));
-                theNumberCell.css('left',getPosLeft(i,j));
-                theNumberCell.css('backgroud-color',getNumberBackgroundColor(board[i][j]));
-                theNumberCell.css('color',getNumberColor(board[i][j]));
+                theNumberCell.css('height', cellSideLength);
+                theNumberCell.css('top', getPosTop(i, j));
+                theNumberCell.css('left', getPosLeft(i, j));
+                theNumberCell.css('background-color', getNumberBackgroundColor(board[i][j]));
+                theNumberCell.css('color', getNumberColor(board[i][j]));
                 theNumberCell.text(board[i][j]);
             }
 
             hasConflicted[i][j] = false;
         }
-    
-    $('.number-cell').css('line-height',cellSideLength + 'px');
+
+    $('.number-cell').css('line-height', cellSideLength + 'px');
     $('.number-cell').css('font-size', 0.6 * cellSideLength + 'px');
+
 }
 
 
@@ -130,6 +132,7 @@ function generateOneNumber(){
 
     //random number at random position
     board[randx][randy] = randNum;
+
 
     showNumberAnimation(randx,randy,randNum);
 
