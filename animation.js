@@ -1,5 +1,5 @@
 function showNumberAnimation(randx,randy,randNum){
-    var numCell = $('#number-cell-' + i + "-" + j);
+    var numCell = $('#number-cell-' + randx + '-' + randy);
 
     numCell.css('background-color',getNumberBackgroundColor(randNum));
     numCell.css('color',getNumberColor(randNum));
@@ -8,8 +8,8 @@ function showNumberAnimation(randx,randy,randNum){
     numCell.animate({
         width:cellSideLength,
         height:cellSideLength,
-        top:getPosTop(i,j),
-        left:getPosLeft(i,j)
+        top:getPosTop(randx,randy),
+        left:getPosLeft(randx,randy)
     },50);
 }
 
@@ -22,5 +22,5 @@ function showMoveAnimation(fromx,fromy,tox,toy){
 }
 
 function updateScore(score){
-    $('#score'.text(score));//可以增加像老虎机一样的分数增长动画
+    $('#score'.text(score));//show animation of score updating
 }
